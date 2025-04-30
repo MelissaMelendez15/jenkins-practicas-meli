@@ -1,0 +1,12 @@
+pipeline {
+    
+    agent any
+
+    stages {
+        stage('Echo') {
+            steps {
+                echo 'Hola Meli, este es tu primer pipeline funcionando'
+            }
+        }
+    }
+}
