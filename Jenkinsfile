@@ -2,7 +2,14 @@ pipeline {
     
     agent any
 
-    stages {
+     stages {
+        stage('Instalar dependencias') {
+            steps {
+                echo 'pip3 install flask pytest requests --break-system-packages'
+            }
+        }
+
+      stages {
         stage('Echo') {
             steps {
                 echo 'Hola Meli, este es tu primer pipeline funcionando'
