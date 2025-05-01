@@ -2,10 +2,14 @@ pipeline {
     
     agent any
     
-    when {
-      not {
-        branch 'develop'
-      }
+    stages {
+        stage ('Run if NOT develop') {
+            when {
+              not {
+                branch 'develop'
+            }
+        }
+        }
     }
     
     stages {
