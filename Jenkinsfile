@@ -1,9 +1,15 @@
 pipeline {
     
     agent any
-
+    
+    when {
+      not {
+        branch 'develop'
+      }
+    }
+    
     stages {
-
+       
         stage ('Instalar dependencias') {
             steps {
                 sh 'pip3 install flask pytest requests --break-system-packages'
