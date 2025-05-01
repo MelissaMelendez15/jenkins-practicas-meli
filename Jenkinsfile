@@ -62,16 +62,22 @@ pipeline {
             parallel {
                stage ('Unit') {
                  steps {
-                  sh 'pytest test/unit'
+                  sh 'pytest test/unit --junitxml=results-unit.xml'
                 }
             }
 
             stage ('Service') {
                   steps {
-                   sh 'pytest test/rest'
+                   sh 'pytest test/rest --junitxml=results-service.xml'
                 }
             }
             }
+        }
+    }
+
+    post {
+        always {
+            junit 'results-*.xml'
         }
     }
 }
