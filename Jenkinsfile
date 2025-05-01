@@ -3,54 +3,80 @@ pipeline {
     agent any
     
     stages {
-        stage ('Run if NOT develop') {
-            when {
-              not {
-                branch 'develop'
-            }
-        }
-        }
-    }
-    
-    stages {
        
         stage ('Instalar dependencias') {
-            steps {
+
+           when {
+            not {
+                branch 'develop'
+            }
+           }
+           steps {
                 sh 'pip3 install flask pytest requests --break-system-packages'
             }
         }
 
         stage('Echo') {
+            when {
+            not {
+                branch 'develop'
+            }
+           }
             steps {
                 echo 'Hola Meli, este es tu primer pipeline funcionando'
             }
         }
 
         stage('Clone') {
+            when {
+            not {
+                branch 'develop'
+            }
+           }
             steps {
                 git branch: 'main', url: 'https://github.com/MelissaMelendez15/jenkins-practicas-meli.git'
             }
         }
 
         stage ('Verificar archivos') {
+          when {
+            not {
+                branch 'develop'
+            }
+           }
           steps {
             sh 'ls -la'
           }
         }
 
         stage ('Mostrar WORKSPACE') {
+            when {
+            not {
+                branch 'develop'
+            }
+           }
             steps {
                 sh 'echo $WORKSPACE'
             }
         }
 
          stage ('Build (simulado)') {
+            when {
+            not {
+                branch 'develop'
+            }
+           }
             steps {
                 echo 'Fase de Build simulada...'
             }
         }
 
         stage ('Iniciar Flask') {
+            when {
+            not {
+                branch 'develop'
+            }
+           }
             steps {
                 sh 'nohup python3 app/calc.py &'
                 sh 'sleep 5'
@@ -58,6 +84,11 @@ pipeline {
         }
 
         stage ('Iniciar Wiremock') {
+            when {
+            not {
+                branch 'develop'
+            }
+           }
             steps {
                 echo 'Iniciando Wiremock con ruta completa...'
                 sh 'ls -la wiremock'
@@ -69,6 +100,11 @@ pipeline {
         }
         
         stage ('Tests en paralelo') {
+            when {
+            not {
+                branch 'develop'
+            }
+           }
             parallel {
                stage ('Unit') {
                  steps {
