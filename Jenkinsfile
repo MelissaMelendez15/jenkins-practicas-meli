@@ -1,4 +1,3 @@
-// Este es un cambio de prueba para activar el polling
 pipeline {
     
     agent any
