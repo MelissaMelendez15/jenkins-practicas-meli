@@ -55,8 +55,9 @@ pipeline {
 
         stage ('Iniciar Wiremock') {
             steps {
-                echo 'Iniciando Wiremock...'
-                sh 'nohup java -jar wiremock-standalone-2.27.2.jar --port 8081 --root-dir wiremock &'
+                echo 'Iniciando Wiremock con ruta completa...'
+                sh 'ls -la wiremock'
+                sh 'nohup java -jar wiremock/wiremock-standalone-2.27.2.jar --port 8081 --root-dir wiremock &'
                 sh 'sleep 10'
                 echo 'Comprobando si Wiremock está vivo...'
                 sh 'curl -v http://localhost:8081/__admin || echo "Wiremock no respondió"'
