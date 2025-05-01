@@ -57,6 +57,7 @@ pipeline {
             steps {
                 sh 'java -jar wiremock-standalone-2.27.2.jar --port 8081 --root-dir wiremock &'
                 sh 'sleep 10'
+                sh 'curl -v http://localhost:8081/__admin'
             }
         }
         
