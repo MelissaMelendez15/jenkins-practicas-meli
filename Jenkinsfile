@@ -56,7 +56,7 @@ pipeline {
         stage ('Iniciar Wiremock') {
             steps {
                 sh 'java -jar wiremock-standalone-2.27.2.jar --port 8081 --root-dir wiremock &'
-                sh 'sleep 5'
+                sh 'sleep 10'
             }
         }
         
