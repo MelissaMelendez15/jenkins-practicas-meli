@@ -40,12 +40,6 @@ pipeline {
             }
         }
 
-        stage ('Unit') {
-            steps {
-                sh 'pytest test/unit'
-            }
-        }
-
         stage ('Iniciar Flask') {
             steps {
                 sh 'nohup python3 app/calc.py &'
@@ -64,9 +58,19 @@ pipeline {
             }
         }
         
-        stage ('Service') {
-            steps {
-                sh 'pytest test/rest'
+        stage ('Tests en paralelo') {
+            parallel {
+               stage ('Unit') {
+                 steps {
+                  sh 'pytest test/unit'
+                }
+            }
+
+            stage ('Service') {
+                  steps {
+                   sh 'pytest test/rest'
+                }
+            }
             }
         }
     }
